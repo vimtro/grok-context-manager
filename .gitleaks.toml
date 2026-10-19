@@ -8,3 +8,11 @@ condition = "AND"
 regexTarget = "secret"
 regexes = ['''^AKIAABCDEFGHIJKLMNOP$''']
 paths = ['''(^|/)tests/core/security-tokens-workflow\.test\.ts$''']
+
+[[allowlists]]
+description = "Fixed fake CRM token inside fictional sales dialogue"
+targetRules = ["generic-api-key"]
+condition = "AND"
+regexTarget = "secret"
+regexes = ['''^sk-proj-ABCD1234efgh5678ijkl9012mnop3456$''']
+paths = ['''(^|/)examples/conversations/sales-bot\.txt$''']
