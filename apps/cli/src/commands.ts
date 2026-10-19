@@ -291,7 +291,10 @@ export function registerCommands(program: Command): void {
     .action(() => {
       const list = svc().listBots(ctx);
       emit(list, () => {
-        if (!list.length) return out('No bots yet. Add one: grokcm bots add sales --name "Sales"');
+        if (!list.length)
+          return out(
+            'No bots yet. Add them by name: grokcm bots quick-add Sales Research "Chief of Staff"',
+          );
         table(
           list.map((b) => [
             b.id,
