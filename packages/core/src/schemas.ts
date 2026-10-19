@@ -368,7 +368,7 @@ export const CheckpointRecordSchema = z.object({
 });
 export type CheckpointRecord = z.infer<typeof CheckpointRecordSchema>;
 
-/** File format written by `gcm checkpoint export --format json`. */
+/** File format written by `grokcm checkpoint export --format json`. */
 export const CheckpointExportSchema = z.object({
   format: z.literal('gcm-checkpoint'),
   formatVersion: z.literal(1),

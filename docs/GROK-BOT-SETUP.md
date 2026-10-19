@@ -28,9 +28,9 @@ private skill, enable it under **Connect apps → Private skills** for each bot 
 Typical use:
 
 1. “Checkpoint this conversation.” → the bot drafts notes with fixed headings and asks for approval.
-2. Copy the approved notes and import them: `Get-Clipboard -Raw | gcm import - --bot sales --partial`
-   (GCM recognises the headings), then `gcm checkpoint create --bot sales --approve`.
-3. “Prepare a fresh-conversation handoff.” → or use `gcm handoff prepare --bot sales` for the GCM version with a
+2. Copy the approved notes and import them: `Get-Clipboard -Raw | grokcm import - --bot sales --partial`
+   (GCM recognises the headings), then `grokcm checkpoint create --bot sales --approve`.
+3. “Prepare a fresh-conversation handoff.” → or use `grokcm handoff prepare --bot sales` for the GCM version with a
    verification code.
 
 ## Option 2 — Remote MCP connector (HTTPS)
@@ -41,13 +41,13 @@ Typical use:
 Cloudflare Tunnel or ngrok:
 
 ```powershell
-gcm mcp token create --name sales-bot --bots sales --write     # copy the printed token
-gcm mcp serve --http --port 8787                                # stays on 127.0.0.1
+grokcm mcp token create --name sales-bot --bots sales --write  # copy the printed token
+grokcm mcp serve --http --port 8787                             # stays on 127.0.0.1
 cloudflared tunnel --url http://127.0.0.1:8787                  # prints https://<random>.trycloudflare.com
 ```
 
 Your PC must stay on while bots use the connector. Anyone with the URL **and** a token can call the tools, so keep
-tokens secret and revoke unused ones (`gcm mcp token revoke <id>`).
+tokens secret and revoke unused ones (`grokcm mcp token revoke <id>`).
 
 **Always-on (small server with Docker).** See [MCP-SETUP.md](MCP-SETUP.md#docker-deployment) — Caddy obtains the
 HTTPS certificate automatically.
@@ -81,7 +81,7 @@ the official docs. Data then lives on the cloud computer, which **all your bots 
    or build it there with `git clone … && pnpm install && pnpm build`).
 2. Ask the bot:
    > Add a custom MCP server called **gcm** that runs:
-   > `npx -y --package /workspace/gcm/grok-context-manager-0.1.0.tgz gcm mcp serve --home /workspace/.gcm-data --bots sales`
+   > `npx -y --package /workspace/gcm/grok-context-manager-0.1.0.tgz grokcm mcp serve --home /workspace/.gcm-data --bots sales`
 3. Test as in Option 2c.
 
 ## What bots must never claim

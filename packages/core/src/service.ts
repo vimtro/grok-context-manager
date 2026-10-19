@@ -234,7 +234,7 @@ export class GcmService {
       throw new GcmError(
         'NOT_FOUND',
         `Bot "${botId}" not found or not accessible.`,
-        'Run `gcm bots list` to see registered bots.',
+        'Run `grokcm bots list` to see registered bots.',
       );
     }
     return bot;
@@ -871,7 +871,7 @@ export class GcmService {
       throw new GcmError(
         'NOT_FOUND',
         `Bot "${botId}" has no checkpoints yet.`,
-        'Create one with `gcm checkpoint create`.',
+        'Create one with `grokcm checkpoint create`.',
       );
     return head;
   }
@@ -1117,7 +1117,7 @@ export class GcmService {
       throw new GcmError(
         'APPROVAL_REQUIRED',
         `Checkpoint v${ck.version} has not been reviewed.`,
-        `Review it (gcm checkpoint show ${ck.id}) and approve with \`gcm checkpoint review ${ck.id}\`, or pass --allow-unreviewed.`,
+        `Review it (grokcm checkpoint show ${ck.id}) and approve with \`grokcm checkpoint review ${ck.id}\`, or pass --allow-unreviewed.`,
       );
     }
     if (!integrity.archiveOk)
@@ -1196,7 +1196,7 @@ export class GcmService {
       throw new GcmError(
         'NOT_FOUND',
         `Bot "${botId}" has no handoffs yet.`,
-        'Prepare one with `gcm handoff prepare`.',
+        'Prepare one with `grokcm handoff prepare`.',
       );
     return h;
   }
@@ -1407,7 +1407,7 @@ export class GcmService {
   }
 
   /**
-   * Restores imports from a `gcm archive export --format json` file. Each exported import becomes a new import
+   * Restores imports from a `grokcm archive export --format json` file. Each exported import becomes a new import
    * (same session labels, coverage and message order); messages already present are skipped as usual.
    */
   importArchiveExport(

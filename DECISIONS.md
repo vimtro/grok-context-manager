@@ -18,3 +18,4 @@ Short, dated records. Newest last.
 14. **Cost advice.** When a handoff would not be meaningfully smaller than the imported text (≥ 80%), GCM warns that a fresh conversation will not save usage yet.
 15. **Global install via tarball.** `pnpm install:global` packs the CLI and runs `npm install -g <tgz>`; installing the workspace folder directly would hit `workspace:*` references.
 16. **Destructive platform steps are never available over MCP.** Reset chat can only be chosen locally (CLI/dashboard) with explicit acknowledgement; dashboard "Add bot" refuses to overwrite an existing profile.
+17. **CLI command is `grokcm` (with `gcm` as an alias).** In PowerShell `gcm` is a read-only built-in alias for `Get-Command`, so `gcm dashboard` never reaches GCM. Docs and hints use `grokcm`; the `gcm` bin remains for Command Prompt/bash users and `gcm.cmd` also works in PowerShell. The product short name stays "GCM".

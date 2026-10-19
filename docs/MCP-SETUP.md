@@ -27,8 +27,8 @@ Stdout carries the protocol; logs go to stderr.
 ## Remote endpoint (HTTP)
 
 ```powershell
-gcm mcp token create --name sales-bot --bots sales --write   # shown once; only its SHA-256 hash is stored
-gcm mcp serve --http --host 127.0.0.1 --port 8787
+grokcm mcp token create --name sales-bot --bots sales --write   # shown once; only its SHA-256 hash is stored
+grokcm mcp serve --http --host 127.0.0.1 --port 8787
 ```
 
 Safety rules (fail closed):
@@ -43,7 +43,7 @@ Safety rules (fail closed):
 - Logs contain method, path, status and duration only — never request bodies or tokens.
 - `GET /healthz` (no auth) returns `{ ok, service, version }` only.
 
-Token management: `gcm mcp token list`, `gcm mcp token revoke <id>`. A token created with `--bots "*"` can access every
+Token management: `grokcm mcp token list`, `grokcm mcp token revoke <id>`. A token created with `--bots "*"` can access every
 bot (fleet coordinator) — create it deliberately.
 
 ## Docker deployment
@@ -63,7 +63,7 @@ curl https://$GCM_DOMAIN/healthz
 The GCM container is not published directly; only Caddy listens on 80/443. Data lives in the `gcm-data` volume —
 back it up with `docker compose run --rm gcm data backup --out /data/backups/manual.sqlite`.
 
-Importing conversations on a remote host: copy the file in and run `docker compose run --rm -v ${PWD}:/in gcm import /in/chat.txt --bot sales`, or let bots import via `gcm_import_context`.
+Importing conversations on a remote host: copy the file in and run `docker compose run --rm -v ${PWD}:/in grokcm import /in/chat.txt --bot sales`, or let bots import via `gcm_import_context`.
 
 ## Connecting Grok Bot
 
@@ -99,5 +99,5 @@ conversation. Errors are returned as `ERROR <CODE>: <message> Hint: …` with `i
 
 ## Overhead
 
-GCM records the estimated size of every MCP response (`gcm usage report` → “MCP response tokens”) so you can see what
+GCM records the estimated size of every MCP response (`grokcm usage report` → “MCP response tokens”) so you can see what
 the connector itself adds to a bot's context.

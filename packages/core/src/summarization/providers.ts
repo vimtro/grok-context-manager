@@ -127,7 +127,7 @@ export class OllamaProvider implements SummarizerProvider {
       return {
         ok: false,
         detail:
-          'No Ollama model configured. Run `ollama list`, then `gcm settings set ollamaModel <name>`.',
+          'No Ollama model configured. Run `ollama list`, then `grokcm settings set ollamaModel <name>`.',
       };
     }
     try {

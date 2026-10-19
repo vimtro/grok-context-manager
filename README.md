@@ -47,22 +47,22 @@ git clone https://github.com/vimtro/grok-context-manager.git
 cd grok-context-manager
 pnpm install
 pnpm build
-pnpm install:global                        # packs the CLI and installs `gcm` globally with npm
-gcm doctor
+pnpm install:global                        # packs the CLI and installs `grokcm` globally with npm (in PowerShell use `grokcm`, not `gcm`)
+grokcm doctor
 ```
 
 Then, for each bot:
 
 ```powershell
-gcm bots add sales --name "Sales" --role "Account executive" --boundary "Never share customer data outside the CRM"
+grokcm bots add sales --name "Sales" --role "Account executive" --boundary "Never share customer data outside the CRM"
 # Copy the Grok Bot conversation (Ctrl+A, Ctrl+C in the chat), then:
-Get-Clipboard -Raw | gcm import - --bot sales --session main
-gcm analyze --bot sales                    # preview: what is kept, what is dropped, conflicts
-gcm checkpoint create --bot sales --approve
-gcm handoff prepare --bot sales            # prints the handoff
-gcm handoff show latest --bot sales --text-only | Set-Clipboard
-gcm handoff action <handoff-id> new_group_chat   # shows the exact steps to do in Grok Bot
-gcm dashboard                              # or do all of this in the browser
+Get-Clipboard -Raw | grokcm import - --bot sales --session main
+grokcm analyze --bot sales                 # preview: what is kept, what is dropped, conflicts
+grokcm checkpoint create --bot sales --approve
+grokcm handoff prepare --bot sales         # prints the handoff
+grokcm handoff show latest --bot sales --text-only | Set-Clipboard
+grokcm handoff action <handoff-id> new_group_chat   # shows the exact steps to do in Grok Bot
+grokcm dashboard                           # or do all of this in the browser
 ```
 
 ## Demonstration

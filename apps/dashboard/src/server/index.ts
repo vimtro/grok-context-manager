@@ -96,7 +96,8 @@ export function buildDashboardApp(
         return reply.code(401).send({
           error: {
             code: 'FORBIDDEN',
-            message: 'Missing or invalid dashboard session. Reload the page from `gcm dashboard`.',
+            message:
+              'Missing or invalid dashboard session. Reload the page from `grokcm dashboard`.',
           },
         });
       }
@@ -358,7 +359,7 @@ export function buildDashboardApp(
       : null;
   const indexHtml = () => {
     if (!staticDir) {
-      return `<!doctype html><meta charset="utf-8"><title>GCM dashboard</title><body style="font-family:system-ui;padding:2rem"><h1>Dashboard assets not built</h1><p>Run <code>pnpm build</code> in the repository, then start <code>gcm dashboard</code> again. The API is running.</p></body>`;
+      return `<!doctype html><meta charset="utf-8"><title>GCM dashboard</title><body style="font-family:system-ui;padding:2rem"><h1>Dashboard assets not built</h1><p>Run <code>pnpm build</code> in the repository, then start <code>grokcm dashboard</code> again. The API is running.</p></body>`;
     }
     return readFileSync(path.join(staticDir, 'index.html'), 'utf8').replace(
       '<!--GCM_SESSION-->',

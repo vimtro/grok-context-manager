@@ -5,6 +5,7 @@
   "license": "MIT",
   "type": "module",
   "bin": {
+    "grokcm": "dist/gcm.mjs",
     "gcm": "dist/gcm.mjs"
   },
   "files": [

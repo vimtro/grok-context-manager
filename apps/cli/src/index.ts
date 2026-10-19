@@ -9,7 +9,7 @@ import { mode, reportError } from './output';
 
 const program = new Command();
 program
-  .name('gcm')
+  .name('grokcm')
   .description(
     'Grok Context Manager: local checkpoints, archives and compact handoffs for Cursor Grok Bot teammates.\n' +
       'GCM manages its own stored copy of context; it never reads, prunes or resets Grok Bot’s transcript.',
@@ -36,14 +36,14 @@ program.addHelpText(
   'after',
   `
 Examples (PowerShell):
-  gcm init
-  gcm bots add sales --name "Sales" --role "Account executive"
-  Get-Clipboard | gcm import - --bot sales --session 2026-10-sales
-  gcm analyze --bot sales
-  gcm checkpoint create --bot sales --approve
-  gcm handoff prepare --bot sales
-  gcm handoff show latest --bot sales --text-only | Set-Clipboard
-  gcm dashboard
+  grokcm init
+  grokcm bots add sales --name "Sales" --role "Account executive"
+  Get-Clipboard | grokcm import - --bot sales --session 2026-10-sales
+  grokcm analyze --bot sales
+  grokcm checkpoint create --bot sales --approve
+  grokcm handoff prepare --bot sales
+  grokcm handoff show latest --bot sales --text-only | Set-Clipboard
+  grokcm dashboard
 `,
 );
 

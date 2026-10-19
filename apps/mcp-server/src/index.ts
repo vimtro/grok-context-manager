@@ -110,7 +110,7 @@ export async function serveHttp(
     throw new GcmError(
       'APPROVAL_REQUIRED',
       'Refusing to start the HTTP MCP server: no active API tokens exist (fail closed).',
-      'Create one first, e.g. `gcm mcp token create --name sales-bot --bots sales --write`.',
+      'Create one first, e.g. `grokcm mcp token create --name sales-bot --bots sales --write`.',
     );
   }
   const loopback = isLoopbackHost(opts.host);

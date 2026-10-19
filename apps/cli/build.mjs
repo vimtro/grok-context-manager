@@ -39,7 +39,7 @@ if (existsSync(path.join(client, 'index.html'))) {
   cpSync(client, path.join(dist, 'dashboard'), { recursive: true });
 } else {
   console.warn(
-    'warning: dashboard client not built (run `pnpm --filter @gcm/dashboard build`); `gcm dashboard` will show a notice.',
+    'warning: dashboard client not built (run `pnpm --filter @gcm/dashboard build`); `grokcm dashboard` will show a notice.',
   );
 }
 for (const f of ['README.md', 'LICENSE']) {

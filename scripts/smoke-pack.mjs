@@ -37,8 +37,10 @@ try {
     stdio: 'inherit',
   });
   const pkgDir = path.join(app, 'node_modules', 'grok-context-manager');
-  const bin = path.join(app, 'node_modules', '.bin', isWin ? 'gcm.cmd' : 'gcm');
-  if (!existsSync(bin)) throw new Error(`bin shim missing: ${bin}`);
+  const bins = ['grokcm', 'gcm'].map((name) =>
+    path.join(app, 'node_modules', '.bin', isWin ? `${name}.cmd` : name),
+  );
+  for (const bin of bins) if (!existsSync(bin)) throw new Error(`bin shim missing: ${bin}`);
   if (!existsSync(path.join(pkgDir, 'dist', 'dashboard', 'index.html')))
     throw new Error('dashboard assets missing from package');
 
@@ -67,8 +69,10 @@ try {
   const ck = JSON.parse(gcm('--json', 'checkpoint', 'create', '--bot', 'sales', '--approve'));
   const ho = JSON.parse(gcm('--json', 'handoff', 'prepare', '--bot', 'sales'));
   const doctor = JSON.parse(gcm('--json', 'doctor'));
-  const shim = spawnSync(bin, ['--version'], { encoding: 'utf8', shell: isWin });
-  if (shim.status !== 0) throw new Error('bin shim failed');
+  for (const bin of bins) {
+    const shim = spawnSync(bin, ['--version'], { encoding: 'utf8', shell: isWin });
+    if (shim.status !== 0) throw new Error(`bin shim failed: ${bin}`);
+  }
   console.log(
     `checkpoint v${ck.checkpoint.version}: source ~${ck.checkpoint.content.stats.sourceTokensEstimate} tokens → handoff ~${ho.tokenEstimate.tokens} tokens (estimated)`,
   );

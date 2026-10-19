@@ -30,7 +30,7 @@ For disk-level protection use BitLocker / FileVault / LUKS. Backups created by G
 
 ## Deleting data
 
-`gcm data delete --bot <id> --yes` and `gcm data purge --yes` delete GCM's own data (after an automatic backup;
+`grokcm data delete --bot <id> --yes` and `grokcm data purge --yes` delete GCM's own data (after an automatic backup;
 `secure_delete` overwrites freed pages). They never touch Cursor or Grok Bot data. Delete the backups folder too if
 you need the data gone everywhere.
 

@@ -11,7 +11,7 @@ Read this before relying on GCM for cost savings.
    documented; bot memory still applies by design.
 3. **Reset chat** is destructive, undocumented, and was missing on at least one Windows build (0.47.0).
 4. **No usage telemetry.** GCM cannot see per-bot tokens or billing. Savings must be measured by you
-   (`gcm usage record`). A verified continuation is not evidence that platform context shrank.
+   (`grokcm usage record`). A verified continuation is not evidence that platform context shrank.
 5. **Connectors need a public HTTPS endpoint** (or the experimental stdio-on-cloud-computer route). Your PC's
    localhost is unreachable from Grok Bot.
 6. **Skill format is undocumented.** GCM ships Markdown instructions you ask the bot to save as a skill.

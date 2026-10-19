@@ -29,7 +29,7 @@ try {
     stdio: 'inherit',
     shell,
   });
-  console.log('\n✓ installed. Open a new terminal and run: gcm doctor');
+  console.log('\n✓ installed. Open a new terminal and run: grokcm doctor');
 } finally {
   rmSync(out, { recursive: true, force: true });
 }

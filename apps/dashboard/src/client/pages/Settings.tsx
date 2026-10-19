@@ -60,8 +60,8 @@ export function SettingsPage() {
             <li className="muted">
               Encryption at rest: not built in. The database sits in your user profile folder
               (protected by your Windows account); use BitLocker for disk encryption. Back up or
-              delete GCM data with <code>gcm data backup</code> /{' '}
-              <code>gcm data delete --bot &lt;id&gt; --yes</code> — this never touches Grok Bot.
+              delete GCM data with <code>grokcm data backup</code> /{' '}
+              <code>grokcm data delete --bot &lt;id&gt; --yes</code> — this never touches Grok Bot.
             </li>
           </ul>
         )}
@@ -91,7 +91,7 @@ export function SettingsPage() {
         </p>
         <p className="muted">
           Tokens are created in the terminal so they are never shown in a browser:{' '}
-          <code>gcm mcp token create --name sales-bot --bots sales --write</code>
+          <code>grokcm mcp token create --name sales-bot --bots sales --write</code>
         </p>
         {mcp.data && mcp.data.tokens.length > 0 && (
           <div className="table-wrap">

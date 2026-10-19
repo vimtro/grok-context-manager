@@ -37,7 +37,7 @@ pnpm install
 pnpm build
 ```
 
-## 3. Put `gcm` on your PATH
+## 3. Put `grokcm` on your PATH
 
 ```powershell
 pnpm install:global     # packs the CLI and runs: npm install -g grok-context-manager-0.1.0.tgz
@@ -46,18 +46,22 @@ pnpm install:global     # packs the CLI and runs: npm install -g grok-context-ma
 Open a new PowerShell window and check:
 
 ```powershell
-gcm --version
-gcm doctor
+grokcm --version
+grokcm doctor
 ```
+
+> **Why `grokcm` and not `gcm`?** In PowerShell, `gcm` is a built-in alias for `Get-Command`, so typing `gcm dashboard`
+> runs `Get-Command` instead of GCM. The package installs both names: use `grokcm` everywhere (it works in PowerShell,
+> Command Prompt, macOS and Linux). `gcm` still works in Command Prompt and bash, and `gcm.cmd` works in PowerShell.
 
 Prefer not to install globally? Run it from the repo: `pnpm gcm doctor` or `node apps\cli\dist\gcm.mjs doctor`.
 
 ## 4. First use
 
 ```powershell
-gcm init                    # creates %LOCALAPPDATA%\GrokContextManager\gcm.sqlite
-gcm bots add sales --name "Sales" --role "Account executive"
-gcm dashboard               # opens http://127.0.0.1:4747 in your browser
+grokcm init                 # creates %LOCALAPPDATA%\GrokContextManager\gcm.sqlite
+grokcm bots add sales --name "Sales" --role "Account executive"
+grokcm dashboard            # opens http://127.0.0.1:4747 in your browser
 ```
 
 Use a different data folder with `--home D:\GCM` or the `GCM_HOME` environment variable.
@@ -79,7 +83,7 @@ Your data is not touched by updates. Schema upgrades back up the database to `ba
 ```powershell
 npm uninstall -g grok-context-manager
 # Optional — delete GCM's own data (never touches Grok Bot):
-gcm data purge --yes          # run before uninstalling, or delete %LOCALAPPDATA%\GrokContextManager
+grokcm data purge --yes       # run before uninstalling, or delete %LOCALAPPDATA%\GrokContextManager
 ```
 
 ## macOS / Linux
@@ -95,7 +99,8 @@ created with owner-only permissions.
 | `gyp ERR!` / `better-sqlite3` build errors during `pnpm install` | You are on an older Node. Install Node 22 or 24 LTS and run `pnpm install` again.                                            |
 | `pnpm : The term 'pnpm' is not recognized`                       | Run `corepack enable` (or `npm install -g pnpm`) and open a new terminal.                                                    |
 | `running scripts is disabled on this system`                     | `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`                                                                        |
-| `gcm` not found after `pnpm install:global`                      | Open a new terminal; check `npm prefix -g` is on PATH.                                                                       |
+| `grokcm` not found after `pnpm install:global`                   | Open a new terminal; check `npm prefix -g` is on PATH.                                                                       |
+| `gcm : The term 'dashboard' is not recognized` (PowerShell)      | `gcm` is PowerShell's alias for `Get-Command`. Use `grokcm dashboard` (or `gcm.cmd dashboard`).                              |
 | Dashboard says "assets not built"                                | Run `pnpm build` (it builds the dashboard before the CLI) and `pnpm install:global` again.                                   |
-| Port 4747 in use                                                 | `gcm dashboard --port 4800`                                                                                                  |
-| `gcm doctor` shows a database failure                            | Restore the newest file from `%LOCALAPPDATA%\GrokContextManager\backups\` by copying it over `gcm.sqlite` (close GCM first). |
+| Port 4747 in use                                                 | `grokcm dashboard --port 4800`                                                                                               |
+| `grokcm doctor` shows a database failure                         | Restore the newest file from `%LOCALAPPDATA%\GrokContextManager\backups\` by copying it over `gcm.sqlite` (close GCM first). |

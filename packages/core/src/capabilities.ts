@@ -1,6 +1,6 @@
 /**
  * Machine-readable Grok Bot capability matrix (mirrors docs/CAPABILITY-MATRIX.md).
- * Surfaced by `gcm doctor`, the dashboard and the `gcm_describe_capabilities` MCP tool so that the product
+ * Surfaced by `grokcm doctor`, the dashboard and the `gcm_describe_capabilities` MCP tool so that the product
  * never claims more than the platform supports.
  */
 
@@ -149,7 +149,7 @@ export const CAPABILITIES: Capability[] = [
       'Third-party guide: the bot runs the command on its cloud computer. Not in official docs.',
     sources: [COMPOSIO],
     approach:
-      'Documented as an optional deployment (`gcm mcp serve --stdio` on the cloud computer). Data then lives on the shared cloud computer.',
+      'Documented as an optional deployment (`grokcm mcp serve --stdio` on the cloud computer). Data then lives on the shared cloud computer.',
   },
   {
     id: 'localhost-mcp',

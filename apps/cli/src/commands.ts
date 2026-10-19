@@ -90,7 +90,11 @@ const profileOpt = (v: string): ProfileName => {
 };
 function requireBot(id: string | undefined): string {
   if (!id)
-    throw new GcmError('VALIDATION', 'Missing --bot <id>.', 'Run `gcm bots list` to see bot IDs.');
+    throw new GcmError(
+      'VALIDATION',
+      'Missing --bot <id>.',
+      'Run `grokcm bots list` to see bot IDs.',
+    );
   if (!BotIdSchema.safeParse(id).success)
     throw new GcmError('VALIDATION', `Invalid bot ID "${id}".`);
   return id;
@@ -194,9 +198,9 @@ export function registerCommands(program: Command): void {
           out(`  database:    ${info_.path} (schema v${info_.schemaVersion})`);
           out('');
           out('Next steps:');
-          out('  gcm bots add sales --name "Sales" --role "Account executive"');
-          out('  gcm import .\\sales-chat.txt --bot sales');
-          out('  gcm checkpoint create --bot sales');
+          out('  grokcm bots add sales --name "Sales" --role "Account executive"');
+          out('  grokcm import .\\sales-chat.txt --bot sales');
+          out('  grokcm checkpoint create --bot sales');
         },
       );
     });
@@ -287,7 +291,7 @@ export function registerCommands(program: Command): void {
     .action(() => {
       const list = svc().listBots(ctx);
       emit(list, () => {
-        if (!list.length) return out('No bots yet. Add one: gcm bots add sales --name "Sales"');
+        if (!list.length) return out('No bots yet. Add one: grokcm bots add sales --name "Sales"');
         table(
           list.map((b) => [
             b.id,
@@ -391,13 +395,13 @@ export function registerCommands(program: Command): void {
   botOptions(
     bots
       .command('add <id>')
-      .description('Register a bot profile (e.g. gcm bots add sales --name "Sales")'),
+      .description('Register a bot profile (e.g. grokcm bots add sales --name "Sales")'),
   ).action(async (id: string, o: Record<string, unknown>) => {
     if (svc().store.getBot(id))
       throw new GcmError(
         'CONFLICT',
         `Bot "${id}" already exists.`,
-        `Use \`gcm bots update ${id}\`.`,
+        `Use \`grokcm bots update ${id}\`.`,
       );
     const r = svc().upsertBot(await toPatch(id, o), ctx, { dryRun: Boolean(o.dryRun) });
     emit(r, () =>
@@ -568,7 +572,7 @@ export function registerCommands(program: Command): void {
       if (o.showHandoff) out(`\n${p.handoffPreview}`);
       out(
         c.dim(
-          `\nSave it with: gcm checkpoint create --bot ${p.botId}${o.profile ? ` --profile ${String(o.profile)}` : ''}`,
+          `\nSave it with: grokcm checkpoint create --bot ${p.botId}${o.profile ? ` --profile ${String(o.profile)}` : ''}`,
         ),
       );
     });
@@ -628,7 +632,7 @@ export function registerCommands(program: Command): void {
       if (r.checkpoint.reviewStatus !== 'reviewed') {
         out(
           c.dim(
-            `Review it (gcm checkpoint show ${r.checkpoint.id} --format markdown), then approve: gcm checkpoint review ${r.checkpoint.id}`,
+            `Review it (grokcm checkpoint show ${r.checkpoint.id} --format markdown), then approve: grokcm checkpoint review ${r.checkpoint.id}`,
           ),
         );
       }
@@ -835,10 +839,10 @@ export function registerCommands(program: Command): void {
         out(
           c.dim('──────────────────────────────────────────────────────────────────────────────'),
         );
-        out(`Next: choose how to continue → gcm handoff action ${h.id} new_group_chat`);
+        out(`Next: choose how to continue → grokcm handoff action ${h.id} new_group_chat`);
         out(
           c.dim(
-            'Tip (PowerShell): gcm handoff show latest --bot ' +
+            'Tip (PowerShell): grokcm handoff show latest --bot ' +
               h.botId +
               ' --text-only | Set-Clipboard',
           ),
@@ -908,7 +912,9 @@ export function registerCommands(program: Command): void {
         out(c.bold(r.guide.title));
         r.guide.steps.forEach((s, i) => out(`  ${i + 1}. ${s}`));
         for (const cv of r.guide.caveats) out(`  ${c.yellow('!')} ${cv}`);
-        out(c.dim(`GCM does not perform this step. When you have done it: gcm handoff done ${id}`));
+        out(
+          c.dim(`GCM does not perform this step. When you have done it: grokcm handoff done ${id}`),
+        );
       });
     });
 
@@ -923,7 +929,7 @@ export function registerCommands(program: Command): void {
         out(`${stateColor(h.state)} — ${STATE_DESCRIPTIONS[h.state]}`);
         out(
           c.dim(
-            `Paste the bot's first reply to verify: gcm handoff verify ${id} --reply-file reply.txt`,
+            `Paste the bot's first reply to verify: grokcm handoff verify ${id} --reply-file reply.txt`,
           ),
         );
       });
@@ -994,7 +1000,7 @@ export function registerCommands(program: Command): void {
       });
     });
   ar.command('import <file>')
-    .description('Restore imports from a `gcm archive export --format json` file')
+    .description('Restore imports from a `grokcm archive export --format json` file')
     .option('--as-bot <id>', 'restore into a different bot (explicit cross-bot restore)')
     .option('--dry-run', 'validate and count without saving')
     .action(async (file: string, o: { asBot?: string; dryRun?: boolean }) => {
