@@ -1,7 +1,7 @@
 name: Feature request
 description: Suggest an improvement grounded in a real workflow
-title: "[Feature]: "
-labels: ["enhancement"]
+title: '[Feature]: '
+labels: ['enhancement']
 body:
   - type: markdown
     attributes:
