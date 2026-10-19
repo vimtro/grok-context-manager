@@ -61,14 +61,7 @@ describe('packaged CLI', () => {
       ]).created,
     ).toBe(true);
     // Native absolute path (backslashes on Windows).
-    const imp = json([
-      'import',
-      path.normalize(FIXTURE),
-      '--bot',
-      'sales',
-      '--session',
-      'acme',
-    ]);
+    const imp = json(['import', path.normalize(FIXTURE), '--bot', 'sales', '--session', 'acme']);
     expect(imp.added).toBe(30);
     const ck = json(['checkpoint', 'create', '--bot', 'sales', '--approve']);
     expect(ck.checkpoint.version).toBe(1);
