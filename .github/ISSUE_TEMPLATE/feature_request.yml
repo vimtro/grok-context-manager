@@ -1,0 +1,38 @@
+name: Feature request
+description: Suggest an improvement grounded in a real workflow
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        GCM cannot directly modify Cursor Grok Bot's private transcript. Proposals relying on unsupported APIs must identify that dependency.
+        Do not include secrets, account data, or real transcripts.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you solving?
+    validations:
+      required: true
+  - type: textarea
+    id: proposed
+    attributes:
+      label: Proposed approach
+    validations:
+      required: true
+  - type: dropdown
+    id: integration
+    attributes:
+      label: Required integration surface
+      options:
+        - GCM local functionality
+        - Official documented API
+        - Optional external tool or provider
+        - Undetermined
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Links or evidence (optional)
+      description: If relying on an external capability, provide official documentation
