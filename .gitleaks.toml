@@ -1,0 +1,10 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "A fixed AWS-shaped redaction test vector, not an issued credential"
+targetRules = ["aws-access-token"]
+condition = "AND"
+regexTarget = "secret"
+regexes = ['''^AKIAABCDEFGHIJKLMNOP$''']
+paths = ['''(^|/)tests/core/security-tokens-workflow\.test\.ts$''']
