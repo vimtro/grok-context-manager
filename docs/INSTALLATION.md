@@ -60,7 +60,7 @@ Prefer not to install globally? Run it from the repo: `pnpm gcm doctor` or `node
 
 ```powershell
 grokcm init                 # creates %LOCALAPPDATA%\GrokContextManager\gcm.sqlite
-grokcm bots add sales --name "Sales" --role "Account executive"
+grokcm bots quick-add Sales Research   # or add bots by name in the dashboard
 grokcm dashboard            # opens http://127.0.0.1:4747 in your browser
 ```
 

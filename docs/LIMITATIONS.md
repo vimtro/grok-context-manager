@@ -18,6 +18,8 @@ Read this before relying on GCM for cost savings.
 
 ## What GCM can only know from you
 
+- Which bots you have. GCM cannot list the bots in your Grok Bot app (no supported API); you add them by name, or
+  paste the bot list from the Grok Bot sidebar into the dashboard.
 - Bot identity (role, rules, routines) — entered by you, never read from Grok Bot.
 - Conversation content — only what you import or a bot passes to a tool. Coverage is labelled `unknown`/`partial`
   unless you assert `complete`.

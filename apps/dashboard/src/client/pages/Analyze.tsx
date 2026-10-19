@@ -3,7 +3,6 @@ import { api, type AnalysisPreview, type BotSummary, type CheckpointRecord } fro
 import {
   Badge,
   Card,
-  Empty,
   ErrorNote,
   Field,
   fmt,
@@ -14,21 +13,27 @@ import {
   useAsync,
 } from '../ui';
 import { ContentView, ItemList } from './Content';
+import { NewBotInline } from './QuickAdd';
+
+const NEW_BOT = '__new__';
 
 export function BotPicker({ botId, base }: { botId?: string; base: string }) {
   const bots = useAsync(() => api.get<BotSummary[]>('/api/bots'), []);
+  const [adding, setAdding] = useState(false);
   if (!bots.data) return <Loading />;
-  if (bots.data.length === 0)
+  if (bots.data.length === 0 || adding)
     return (
-      <Empty>
-        No bots yet. <a href="#/bots/new">Add a bot</a> first.
-      </Empty>
+      <NewBotInline base={base} onCancel={bots.data.length ? () => setAdding(false) : undefined} />
     );
   return (
     <Field label="Bot">
       <select
         value={botId ?? ''}
-        onChange={(e) => (window.location.hash = `#/${base}/${e.target.value}`)}
+        onChange={(e) =>
+          e.target.value === NEW_BOT
+            ? setAdding(true)
+            : (window.location.hash = `#/${base}/${e.target.value}`)
+        }
       >
         <option value="" disabled>
           Choose a bot…
@@ -38,6 +43,7 @@ export function BotPicker({ botId, base }: { botId?: string; base: string }) {
             {b.name} ({b.id})
           </option>
         ))}
+        <option value={NEW_BOT}>+ New bot…</option>
       </select>
     </Field>
   );

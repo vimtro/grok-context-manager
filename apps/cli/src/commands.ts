@@ -410,6 +410,28 @@ export function registerCommands(program: Command): void {
       ),
     );
   });
+  bots
+    .command('quick-add <names...>')
+    .description(
+      'Register several bots from their names only (e.g. grokcm bots quick-add Sales Research "Chief of Staff"; ' +
+        'use "-" to read one name per line from stdin: Get-Clipboard | grokcm bots quick-add -)',
+    )
+    .option('--dry-run', 'show what would be added without saving')
+    .action(async (names: string[], o: { dryRun?: boolean }) => {
+      const text = names.length === 1 && names[0] === '-' ? await readInput('-') : names.join('\n');
+      const r = svc().quickAddBots(text, ctx, { dryRun: Boolean(o.dryRun) });
+      emit(r, () => {
+        const list = (xs: { id: string; name: string }[]) =>
+          xs.map((b) => `${c.cyan(b.id)} (${b.name})`).join(', ');
+        if (r.created.length)
+          out(
+            `${o.dryRun ? c.yellow('[dry run] would add') : c.green('✓ added')} ${r.created.length} bot(s): ${list(r.created)}`,
+          );
+        if (r.existing.length) out(c.dim(`already registered: ${list(r.existing)}`));
+        if (r.ignored.length) out(c.dim(`ignored (not bot names): ${r.ignored.join(', ')}`));
+        if (!r.created.length && !r.existing.length) warn('No bot names found.');
+      });
+    });
   botOptions(
     bots
       .command('update <id>')

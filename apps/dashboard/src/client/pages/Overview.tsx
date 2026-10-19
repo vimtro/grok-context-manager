@@ -1,8 +1,12 @@
 import { api, type Overview as OverviewData } from '../api';
 import { Badge, Card, Empty, ErrorNote, fmt, Loading, Note, Stat, useAsync } from '../ui';
+import { QuickAddBots } from './QuickAdd';
 
 export function Overview() {
-  const { data, error, loading } = useAsync(() => api.get<OverviewData>('/api/overview'), []);
+  const { data, error, loading, reload } = useAsync(
+    () => api.get<OverviewData>('/api/overview'),
+    [],
+  );
   if (loading && !data) return <Loading />;
   if (error) return <ErrorNote error={error} />;
   if (!data) return null;
@@ -13,8 +17,8 @@ export function Overview() {
     <>
       <div className="page-head">
         <h1>Overview</h1>
-        <a className="btn btn-primary" href="#/bots/new">
-          Add bot
+        <a className="btn btn-primary" href="#/bots">
+          Add bots
         </a>
       </div>
       <Note>
@@ -22,6 +26,7 @@ export function Overview() {
         read, compact or reset Grok Bot’s own conversations — when it is time for a fresh
         conversation, the Handoff wizard walks you through the step in the Grok Bot app.
       </Note>
+      {data.bots.length === 0 && <QuickAddBots onAdded={reload} />}
       <div className="stats">
         <Stat label="Registered bots" value={data.bots.length} />
         <Stat label="Recent checkpoints" value={data.recentCheckpoints.length} />
@@ -35,9 +40,7 @@ export function Overview() {
 
       <Card title="Bots">
         {data.bots.length === 0 ? (
-          <Empty>
-            No bots yet. <a href="#/bots/new">Add your first bot</a>, then import a conversation.
-          </Empty>
+          <Empty>No bots yet. Add their names above, then import a conversation.</Empty>
         ) : (
           <div className="table-wrap">
             <table>

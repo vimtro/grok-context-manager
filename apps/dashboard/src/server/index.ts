@@ -207,6 +207,10 @@ export function buildDashboardApp(
     }
     return service.upsertBot(patch as never, ctx);
   });
+  app.post('/api/bots/quick-add', async (req) => {
+    const b = (req.body ?? {}) as Body;
+    return service.quickAddBots(String(b.text ?? ''), ctx, { dryRun: b.dryRun === true });
+  });
   app.get<{ Params: { id: string } }>('/api/bots/:id', async (req) => {
     const bot = service.getBot(req.params.id, ctx);
     const summary = service.listBots(ctx).find((b) => b.id === bot.id) ?? null;

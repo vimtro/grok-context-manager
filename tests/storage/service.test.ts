@@ -425,3 +425,30 @@ describe('archive recovery', () => {
     ).toBeGreaterThan(0);
   });
 });
+
+describe('quick-add bots by name', () => {
+  it('creates bots from names, reports existing ones and never modifies them', () => {
+    seedBot(env, 'sales', 'sales-bot.txt', 'Sales Bot');
+    const dry = env.service.quickAddBots('Research\nSales', env.ctx, { dryRun: true });
+    expect(dry.created.map((b) => b.id)).toEqual(['research']);
+    expect(env.service.store.getBot('research')).toBeNull();
+
+    const r = env.service.quickAddBots('Research\nSales\n2h\nChief of Staff', env.ctx);
+    expect(r.created).toEqual([
+      { id: 'research', name: 'Research' },
+      { id: 'chief-of-staff', name: 'Chief of Staff' },
+    ]);
+    expect(r.existing).toEqual([{ id: 'sales', name: 'Sales Bot' }]);
+    expect(r.ignored).toEqual(['2h']);
+    expect(env.service.getBot('chief-of-staff', env.ctx).identitySource).toBe('user_provided');
+    expect(env.service.store.getBot('sales')?.name).toBe('Sales Bot');
+  });
+
+  it('refuses read-only access and out-of-scope bots without partial writes', () => {
+    const readOnly: AccessContext = { ...env.ctx, canWrite: false };
+    expect(code(() => env.service.quickAddBots('Research', readOnly))).toBe('FORBIDDEN');
+    const scoped: AccessContext = { ...env.ctx, bots: ['research'] };
+    expect(code(() => env.service.quickAddBots('Research\nSupport', scoped))).toBe('FORBIDDEN');
+    expect(env.service.store.getBot('research')).toBeNull();
+  });
+});

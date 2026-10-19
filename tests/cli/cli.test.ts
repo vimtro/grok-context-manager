@@ -179,4 +179,15 @@ describe('packaged CLI', () => {
     expect(gcm(['settings', 'set', 'ollamaUrl', 'https://llm.example.com']).code).toBe(5);
     expect(gcm(['settings', 'set', 'ollamaUrl', 'http://127.0.0.1:11434']).code).toBe(0);
   });
+
+  it('quick-adds bots from names (arguments or stdin) without touching existing ones', () => {
+    const dry = json(['bots', 'quick-add', 'Ops Desk', '--dry-run']);
+    expect(dry.created).toEqual([{ id: 'ops-desk', name: 'Ops Desk' }]);
+    const r = json(['bots', 'quick-add', 'Ops Desk', 'Sales']);
+    expect(r.created.map((b: { id: string }) => b.id)).toEqual(['ops-desk']);
+    expect(r.existing.map((b: { id: string }) => b.id)).toEqual(['sales']);
+    const piped = json(['bots', 'quick-add', '-'], 'Chief of Staff\n2h\nYesterday\n');
+    expect(piped.created).toEqual([{ id: 'chief-of-staff', name: 'Chief of Staff' }]);
+    expect(piped.ignored).toEqual(['2h', 'Yesterday']);
+  });
 });

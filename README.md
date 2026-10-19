@@ -51,10 +51,10 @@ pnpm install:global                        # packs the CLI and installs `grokcm`
 grokcm doctor
 ```
 
-Then, for each bot:
+Then add your bots by name (or paste them in the dashboard under **Bots → Add your bots**) and, for each bot:
 
 ```powershell
-grokcm bots add sales --name "Sales" --role "Account executive" --boundary "Never share customer data outside the CRM"
+grokcm bots quick-add Sales Research "Chief of Staff"   # only names needed; details are optional
 # Copy the Grok Bot conversation (Ctrl+A, Ctrl+C in the chat), then:
 Get-Clipboard -Raw | grokcm import - --bot sales --session main
 grokcm analyze --bot sales                 # preview: what is kept, what is dropped, conflicts

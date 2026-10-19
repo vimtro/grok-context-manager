@@ -97,6 +97,12 @@ export const api = {
   },
 };
 
+export interface QuickAddResult {
+  created: { id: string; name: string }[];
+  existing: { id: string; name: string }[];
+  ignored: string[];
+}
+
 export interface Overview {
   bots: BotSummary[];
   recentCheckpoints: {

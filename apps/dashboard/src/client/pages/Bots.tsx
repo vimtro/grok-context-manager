@@ -22,22 +22,24 @@ import {
   useAction,
   useAsync,
 } from '../ui';
+import { QuickAddBots } from './QuickAdd';
 
 export function BotsList() {
-  const { data, error, loading } = useAsync(() => api.get<BotSummary[]>('/api/bots'), []);
+  const { data, error, loading, reload } = useAsync(() => api.get<BotSummary[]>('/api/bots'), []);
   return (
     <>
       <div className="page-head">
         <h1>Bots</h1>
-        <a className="btn btn-primary" href="#/bots/new">
-          Add bot
+        <a className="btn" href="#/bots/new">
+          Add bot with full profile
         </a>
       </div>
+      <QuickAddBots onAdded={reload} />
       <ErrorNote error={error} />
       {loading && !data ? (
         <Loading />
       ) : data && data.length === 0 ? (
-        <Empty>No bots registered yet.</Empty>
+        <Empty>No bots yet. Add their names above.</Empty>
       ) : (
         <div className="cards">
           {data?.map((b) => (

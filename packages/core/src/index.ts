@@ -5,6 +5,13 @@ export * from './capabilities';
 export * from './workflow';
 export * from './service';
 export {
+  botIdFromName,
+  parseBotNames,
+  QUICK_ADD_MAX_CHARS,
+  QUICK_ADD_MAX_NAMES,
+  type ParsedBotNames,
+} from './bots/names';
+export {
   parseConversation,
   detectFormat,
   mapRole,

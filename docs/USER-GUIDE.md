@@ -24,6 +24,17 @@ conversation with the same bot (usually a new group chat that includes it). The 
 
 ### 1. Register your bots (once)
 
+The quickest way is by name only. In the dashboard, open **Bots** and type or paste your bot names into **Add your
+bots** (you can paste the bot list from the Grok Bot sidebar; times and message previews are ignored), or:
+
+```powershell
+grokcm bots quick-add Sales Research "Chief of Staff"
+Get-Clipboard | grokcm bots quick-add -     # one name per line, e.g. copied from the Grok Bot sidebar
+```
+
+GCM cannot read your bot list from the Grok Bot app itself: there is no supported API for it, and GCM does not
+read the app's private data. Details such as role and rules are optional; add them later with **Edit profile** or:
+
 ```powershell
 grokcm bots add chief-of-staff --name "Chief of Staff" --role "Agency coordinator" `
   --boundary "Do not forward client contracts outside the agency" --profile compact

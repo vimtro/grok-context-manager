@@ -5,6 +5,7 @@
  * checkpoint → handoff, integrity verification, caching (no repeated work for unchanged input), and an
  * operations log that records GCM's own overhead without storing conversation content.
  */
+import { parseBotNames, QUICK_ADD_MAX_CHARS } from './bots/names';
 import { CAPABILITIES } from './capabilities';
 import { diffCheckpoints, type CheckpointDiff } from './checkpoint/diff';
 import { renderCheckpointMarkdown, renderHandoff, type HandoffMeta } from './checkpoint/render';
@@ -437,6 +438,46 @@ export class GcmService {
       responseTokens: 0,
     });
     return { bot, created: !existing };
+  }
+
+  /**
+   * Registers bots from a list of names (one per line; pasted sidebar text is fine). Only the name is needed; the
+   * ID is derived from it. Existing bots are reported and never modified.
+   */
+  quickAddBots(
+    text: string,
+    ctx: AccessContext,
+    opts: { dryRun?: boolean } = {},
+  ): {
+    created: { id: string; name: string }[];
+    existing: { id: string; name: string }[];
+    ignored: string[];
+  } {
+    if (!ctx.canWrite) throw new GcmError('FORBIDDEN', 'This access token is read-only.');
+    if (typeof text !== 'string' || text.length > QUICK_ADD_MAX_CHARS)
+      throw new GcmError('VALIDATION', `Paste at most ${QUICK_ADD_MAX_CHARS} characters of names.`);
+    const { names, ignored } = parseBotNames(text);
+    // Check scope for every new bot first so a scoped token never leaves a half-applied list.
+    const denied = names.filter(
+      (n) => ctx.bots !== '*' && !ctx.bots.includes(n.id) && !this.store.getBot(n.id),
+    );
+    if (denied.length)
+      throw new GcmError(
+        'FORBIDDEN',
+        `This token may not create bot(s): ${denied.map((n) => n.id).join(', ')}.`,
+      );
+    const created: { id: string; name: string }[] = [];
+    const existing: { id: string; name: string }[] = [];
+    for (const n of names) {
+      const found = this.store.getBot(n.id);
+      if (found) existing.push({ id: found.id, name: found.name });
+      else created.push(this.upsertBot({ id: n.id, name: n.name }, ctx, opts).bot);
+    }
+    return {
+      created: created.map(({ id, name }) => ({ id, name })),
+      existing,
+      ignored,
+    };
   }
 
   // -------------------------------------------------------------------------------------------

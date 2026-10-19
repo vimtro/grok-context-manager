@@ -98,6 +98,28 @@ test('theme toggle switches to dark mode', async ({ page }) => {
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
 });
 
+test('quick-adds bots from a pasted list of names', async ({ page }) => {
+  await page.goto('/#/bots');
+  await page.getByLabel('Bot names').fill('Support Desk\n5 min ago\nSales\nChief of Staff');
+  const preview = page.locator('.quick-preview');
+  await expect(preview.getByLabel(/Support Desk/)).toBeChecked();
+  await expect(preview).toContainText('Already added: Sales Bot');
+  await expect(preview).toContainText('Ignored (not bot names): 5 min ago');
+  await preview.getByLabel(/Chief of Staff/).uncheck();
+  await page.getByRole('button', { name: 'Add 1 bot', exact: true }).click();
+  await expect(page.getByRole('link', { name: /Support Desk/ })).toBeVisible();
+  await expect(page.getByRole('link', { name: /Chief of Staff/ })).toHaveCount(0);
+});
+
+test('"+ New bot" in the bot picker needs only a name', async ({ page }) => {
+  await page.goto('/#/analyze');
+  await page.getByLabel('Bot', { exact: true }).selectOption({ label: '+ New bot…' });
+  await page.getByLabel('New bot name').fill('Ops Team');
+  await page.getByRole('button', { name: 'Add bot', exact: true }).click();
+  await expect(page).toHaveURL(/#\/analyze\/ops-team$/);
+  await expect(page.getByLabel('Conversation text')).toBeVisible();
+});
+
 test('layout fits a phone screen @responsive', async ({ page }) => {
   await page.goto('/#/checkpoints/sales');
   await expect(page.getByRole('heading', { name: 'Checkpoints' })).toBeVisible();
