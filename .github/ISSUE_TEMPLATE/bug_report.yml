@@ -1,7 +1,7 @@
 name: Bug report
 description: Report a reproducible problem using synthetic data only
-title: "[Bug]: "
-labels: ["bug"]
+title: '[Bug]: '
+labels: ['bug']
 body:
   - type: markdown
     attributes:
