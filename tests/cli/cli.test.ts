@@ -60,10 +60,10 @@ describe('packaged CLI', () => {
         'Never share customer data',
       ]).created,
     ).toBe(true);
-    // Windows-style absolute path with backslashes.
+    // Native absolute path (backslashes on Windows).
     const imp = json([
       'import',
-      path.win32.normalize(FIXTURE),
+      path.normalize(FIXTURE),
       '--bot',
       'sales',
       '--session',
