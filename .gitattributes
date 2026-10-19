@@ -1,0 +1,5 @@
+# Keep LF line endings on every platform (Prettier enforces "endOfLine": "lf", including on Windows CI).
+* text=auto eol=lf
+*.png binary
+*.ico binary
+*.woff2 binary

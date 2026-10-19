@@ -1,0 +1,45 @@
+# Remote GCM MCP endpoint with automatic HTTPS (Caddy + Let's Encrypt).
+# 1. cp .env.example docker/.env and set GCM_DOMAIN (DNS must point to this host; ports 80/443 open).
+# 2. docker compose -f docker/docker-compose.yml run --rm gcm mcp token create --name sales-bot --bots sales --write
+# 3. docker compose -f docker/docker-compose.yml up -d
+
+services:
+  gcm:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: grok-context-manager:0.1.0
+    restart: unless-stopped
+    environment:
+      GCM_HOME: /data
+    volumes:
+      - gcm-data:/data
+    expose:
+      - '8787'
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+
+  caddy:
+    image: caddy:2.10-alpine
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '443:443'
+    environment:
+      GCM_DOMAIN: ${GCM_DOMAIN:?set GCM_DOMAIN in docker/.env}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      - gcm
+
+volumes:
+  gcm-data:
+  caddy-data:
+  caddy-config:

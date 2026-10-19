@@ -1,0 +1,14 @@
+{
+  "name": "@gcm/storage",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "GCM local persistence: SQLite store, migrations, backups, data-directory handling.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@gcm/core": "workspace:*",
+    "better-sqlite3": "^12.11.1"
+  }
+}

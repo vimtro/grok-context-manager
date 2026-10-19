@@ -1,0 +1,11 @@
+**/dist
+**/node_modules
+pnpm-lock.yaml
+coverage
+playwright-report
+test-results
+.gcm-dev
+examples/**/*.txt
+examples/conversations
+examples/checkpoints
+examples/handoffs

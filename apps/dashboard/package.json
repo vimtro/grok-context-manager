@@ -1,0 +1,21 @@
+{
+  "name": "@gcm/dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "GCM local dashboard: React client (Vite) and a localhost-only Fastify API server.",
+  "exports": {
+    "./server": "./src/server/index.ts"
+  },
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite"
+  },
+  "dependencies": {
+    "@gcm/core": "workspace:*",
+    "@gcm/storage": "workspace:*",
+    "fastify": "^5.6.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  }
+}

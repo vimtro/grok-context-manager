@@ -1,0 +1,40 @@
+{
+  "name": "grok-context-manager",
+  "version": "0.1.0",
+  "description": "Grok Context Manager (GCM): checkpoints, local archives, compact handoffs and an MCP server for Cursor Grok Bot teammates. Keep your bots. Keep their knowledge. Lose the unnecessary context.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "gcm": "dist/gcm.mjs"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "keywords": [
+    "grok-bot",
+    "cursor",
+    "mcp",
+    "context",
+    "checkpoint",
+    "handoff",
+    "tokens"
+  ],
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.11.1"
+  },
+  "devDependencies": {
+    "@gcm/core": "workspace:*",
+    "@gcm/dashboard": "workspace:*",
+    "@gcm/mcp-server": "workspace:*",
+    "@gcm/storage": "workspace:*",
+    "commander": "^14.0.3"
+  }
+}

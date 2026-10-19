@@ -1,0 +1,19 @@
+node_modules/
+dist/
+coverage/
+playwright-report/
+test-results/
+*.tgz
+.env
+.env.*
+!.env.example
+# local GCM data used during development — never commit conversation data
+.gcm-dev/
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+*.db
+.DS_Store
+Thumbs.db
+apps/cli/README.md
+apps/cli/LICENSE

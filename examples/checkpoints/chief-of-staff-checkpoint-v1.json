@@ -1,0 +1,443 @@
+{
+  "format": "gcm-checkpoint",
+  "formatVersion": 1,
+  "exportedAt": "2026-10-19T11:07:04.631Z",
+  "appVersion": "0.1.0",
+  "checkpoint": {
+    "id": "ck_0mvf5ggg8dc2d073bdf",
+    "botId": "chief-of-staff",
+    "version": 1,
+    "parentId": null,
+    "restoredFromId": null,
+    "schemaVersion": 1,
+    "createdAt": "2026-10-19T11:07:01.064Z",
+    "sessionRef": null,
+    "source": {
+      "importIds": [
+        "imp_0mvf5gfeb9ea156bef4"
+      ],
+      "completeness": "unknown",
+      "messageCount": 193,
+      "provider": "deterministic",
+      "profile": "compact",
+      "engineVersion": "det-1.0.0",
+      "basedOnCheckpointId": null
+    },
+    "content": {
+      "identity": {
+        "botId": "chief-of-staff",
+        "name": "Chief of Staff",
+        "role": "Agency coordinator",
+        "profileHash": "98bbb8e2d850f568466d127741ccbd361643906038714435a9109eaa1b23ea94",
+        "source": "user_provided",
+        "standingRules": [
+          "Do not forward client contracts outside the agency"
+        ]
+      },
+      "workstream": null,
+      "objective": {
+        "text": "Current focus: prepare the Q4 board deck and close the October books.",
+        "basis": "explicit",
+        "sourceRefs": [
+          {
+            "importId": "imp_0mvf5gfeb9ea156bef4",
+            "seq": 7,
+            "role": "user"
+          }
+        ]
+      },
+      "constraints": [
+        {
+          "id": "it_92ff5eb69806",
+          "category": "permanent",
+          "kind": "constraint",
+          "text": "Never approve invoices above $5,000 without the founder’s sign-off.",
+          "flags": [
+            "negative_instruction",
+            "user_stated"
+          ],
+          "identifiers": [
+            "$5,000"
+          ],
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gfeb9ea156bef4",
+              "seq": 8,
+              "role": "user"
+            }
+          ],
+          "confidence": 0.85,
+          "reason": "negative instruction",
+          "protected": true,
+          "order": 17
+        },
+        {
+          "id": "it_29cc24157da5",
+          "category": "permanent",
+          "kind": "constraint",
+          "text": "Do not share client data with contractors who are not on the NDA list.",
+          "flags": [
+            "negative_instruction",
+            "security",
+            "user_stated"
+          ],
+          "identifiers": [],
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gfeb9ea156bef4",
+              "seq": 9,
+              "role": "user"
+            }
+          ],
+          "confidence": 0.85,
+          "reason": "negative instruction",
+          "protected": true,
+          "order": 18
+        },
+        {
+          "id": "it_b735b2430bff",
+          "category": "permanent",
+          "kind": "policy",
+          "text": "Always route contract changes through /workspace/legal/contract-review.md before sending.",
+          "flags": [
+            "user_stated"
+          ],
+          "identifiers": [
+            "/workspace/legal/contract-review.md"
+          ],
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gfeb9ea156bef4",
+              "seq": 155,
+              "role": "user"
+            }
+          ],
+          "confidence": 0.7,
+          "reason": "standing policy",
+          "protected": true,
+          "order": 553
+        }
+      ],
+      "decisions": [
+        {
+          "id": "it_3ccfb8111ecd",
+          "category": "decision",
+          "kind": "decision",
+          "text": "We decided to move the weekly ops sync to Tuesdays at 10:00.",
+          "flags": [
+            "user_stated"
+          ],
+          "identifiers": [],
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gfeb9ea156bef4",
+              "seq": 26,
+              "role": "user"
+            }
+          ],
+          "confidence": 0.85,
+          "reason": "decision language",
+          "protected": true,
+          "order": 80
+        },
+        {
+          "id": "it_c04212be8619",
+          "category": "decision",
+          "kind": "decision",
+          "text": "switch from Asana to Linear instead of Asana for engineering tasks.",
+          "flags": [
+            "supersedes",
+            "user_stated"
+          ],
+          "identifiers": [],
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gfeb9ea156bef4",
+              "seq": 103,
+              "role": "user"
+            }
+          ],
+          "confidence": 0.9,
+          "reason": "label \"decision:\"",
+          "protected": true,
+          "order": 366
+        }
+      ],
+      "pendingTasks": [
+        {
+          "id": "it_8abb94f820a8",
+          "category": "active_work",
+          "kind": "task",
+          "text": "The Q4 board deck is due by 2026-11-15.",
+          "flags": [
+            "deadline",
+            "user_stated"
+          ],
+          "identifiers": [],
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gfeb9ea156bef4",
+              "seq": 146,
+              "role": "user"
+            }
+          ],
+          "confidence": 0.4,
+          "reason": "no durable signal; explicit deadline",
+          "protected": true,
+          "order": 523,
+          "deadline": "2026-11-15"
+        },
+        {
+          "id": "it_20858e90fd75",
+          "category": "active_work",
+          "kind": "task",
+          "text": "renew the Figma team plan before 2026-11-01.",
+          "flags": [
+            "deadline",
+            "user_stated"
+          ],
+          "identifiers": [],
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gfeb9ea156bef4",
+              "seq": 69,
+              "role": "user"
+            }
+          ],
+          "confidence": 0.9,
+          "reason": "label \"todo:\"",
+          "protected": true,
+          "order": 237,
+          "deadline": "2026-11-01"
+        },
+        {
+          "id": "it_ea2db99b414d",
+          "category": "active_work",
+          "kind": "task",
+          "text": "collect final revenue numbers from finance and draft slides 4–9 of the board deck.",
+          "flags": [
+            "user_stated"
+          ],
+          "identifiers": [],
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gfeb9ea156bef4",
+              "seq": 181,
+              "role": "user"
+            }
+          ],
+          "confidence": 0.9,
+          "reason": "label \"next steps:\"",
+          "protected": true,
+          "order": 639
+        }
+      ],
+      "openQuestions": [
+        {
+          "id": "it_78279e8f07a4",
+          "category": "open_question",
+          "kind": "question",
+          "text": "Should I schedule the board deck dry run for Thursday or Friday?",
+          "flags": [],
+          "identifiers": [],
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gfeb9ea156bef4",
+              "seq": 190,
+              "role": "assistant"
+            }
+          ],
+          "confidence": 0.65,
+          "reason": "unanswered question",
+          "protected": true,
+          "order": 670
+        },
+        {
+          "id": "it_fa08960df475",
+          "category": "open_question",
+          "kind": "blocker",
+          "text": "waiting on the bank to verify the new payroll account.",
+          "flags": [
+            "user_stated"
+          ],
+          "identifiers": [],
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gfeb9ea156bef4",
+              "seq": 129,
+              "role": "user"
+            }
+          ],
+          "confidence": 0.9,
+          "reason": "label \"blocked:\"",
+          "protected": true,
+          "order": 458
+        }
+      ],
+      "progress": [
+        {
+          "id": "it_2161fc7e5e1f",
+          "category": "obsolete",
+          "kind": "completed",
+          "text": "sent the October invoice batch to finance.",
+          "flags": [],
+          "identifiers": [],
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gfeb9ea156bef4",
+              "seq": 120,
+              "role": "assistant"
+            }
+          ],
+          "confidence": 0.85,
+          "reason": "label \"done:\"",
+          "protected": false,
+          "order": 428
+        }
+      ],
+      "knowledge": [
+        {
+          "id": "it_1eafb2574611",
+          "category": "permanent",
+          "kind": "preference",
+          "text": "Their team prefers short written updates over calls, and they tend to batch questions on Thursdays.",
+          "flags": [],
+          "identifiers": [],
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gfeb9ea156bef4",
+              "seq": 11,
+              "role": "assistant"
+            },
+            {
+              "importId": "imp_0mvf5gfeb9ea156bef4",
+              "seq": 19,
+              "role": "assistant"
+            },
+            {
+              "importId": "imp_0mvf5gfeb9ea156bef4",
+              "seq": 28,
+              "role": "assistant"
+            },
+            {
+              "importId": "imp_0mvf5gfeb9ea156bef4",
+              "seq": 45,
+              "role": "assistant"
+            },
+            {
+              "importId": "imp_0mvf5gfeb9ea156bef4",
+              "seq": 62,
+              "role": "assistant"
+            },
+            {
+              "importId": "imp_0mvf5gfeb9ea156bef4",
+              "seq": 122,
+              "role": "assistant"
+            },
+            {
+              "importId": "imp_0mvf5gfeb9ea156bef4",
+              "seq": 157,
+              "role": "assistant"
+            },
+            {
+              "importId": "imp_0mvf5gfeb9ea156bef4",
+              "seq": 165,
+              "role": "assistant"
+            },
+            {
+              "importId": "imp_0mvf5gfeb9ea156bef4",
+              "seq": 183,
+              "role": "assistant"
+            },
+            {
+              "importId": "imp_0mvf5gfeb9ea156bef4",
+              "seq": 192,
+              "role": "assistant"
+            }
+          ],
+          "confidence": 0.65,
+          "reason": "preference",
+          "protected": false,
+          "order": 673
+        },
+        {
+          "id": "it_6c7191d77669",
+          "category": "permanent",
+          "kind": "preference",
+          "text": "The client prefers weekly summaries in bullet form, not long prose.",
+          "flags": [
+            "user_stated"
+          ],
+          "identifiers": [],
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gfeb9ea156bef4",
+              "seq": 86,
+              "role": "user"
+            }
+          ],
+          "confidence": 0.65,
+          "reason": "preference",
+          "protected": false,
+          "order": 300
+        }
+      ],
+      "resources": [
+        {
+          "value": "/workspace/legal/contract-review.md",
+          "type": "file",
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gfeb9ea156bef4",
+              "seq": 155,
+              "role": "user"
+            }
+          ]
+        }
+      ],
+      "conflicts": [],
+      "uncertainties": [
+        "Source coverage is unknown: this checkpoint only reflects material imported into GCM; Grok Bot may hold earlier context that is not represented here.",
+        "1 passage(s) resembling instruction overrides were excluded from working context; review them in the archive."
+      ],
+      "recommendedNextAction": {
+        "text": "Resolve blocker: waiting on the bank to verify the new payroll account.",
+        "basis": "most recent open blocker",
+        "sourceRefs": [
+          {
+            "importId": "imp_0mvf5gfeb9ea156bef4",
+            "seq": 129,
+            "role": "user"
+          }
+        ]
+      },
+      "narrative": null,
+      "excluded": {
+        "temporary": 32,
+        "obsolete": 2,
+        "historical": 131,
+        "quarantined": 1,
+        "overBudget": 0,
+        "overBudgetItems": []
+      },
+      "stats": {
+        "sourceMessages": 193,
+        "sourceChars": 64744,
+        "sourceTokensEstimate": 16255,
+        "unitsAnalyzed": 679,
+        "duplicatesMerged": 499,
+        "supersessions": 2
+      }
+    },
+    "contentHash": "8223b70cf789d6e5005abaf3bc3c35c5b1f4ae7154c0b62a77ee10177d47fe06",
+    "tokenEstimate": {
+      "tokens": 594,
+      "method": "heuristic",
+      "kind": "estimated"
+    },
+    "warnings": [],
+    "reviewStatus": "reviewed",
+    "reviewedAt": "2026-10-19T11:07:01.064Z",
+    "reviewNote": "Reviewed example"
+  }
+}

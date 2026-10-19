@@ -1,0 +1,20 @@
+# Decisions and blockers
+
+Short, dated records. Newest last.
+
+1. **2026-10-19 — No Cursor-internal access.** Grok Bot exposes no conversation API; compaction/reset controls are not shipped (see docs/CAPABILITY-MATRIX.md). GCM manages only its own stored copy and prepares handoffs. No session-secret decryption, private endpoints, or app-database access (unlike the community macOS CLI).
+2. **Recommended reset route = new group chat with the bot.** "New chat" in Grok Bot creates a new bot or a 2–6 bot group; there is no fresh 1:1 chat with an existing bot. Reset chat is destructive and was missing on Windows 0.47.0, so it is optional and gated behind explicit acknowledgement.
+3. **Consolidated packages.** `packages/core` holds schemas, parsing, token estimation, compaction, summarization, rendering, workflow and the `GcmService`; `packages/storage` holds SQLite. Separate placeholder packages (token-estimation, summarization, adapters, shared-types) were not created — they would have no independent consumers.
+4. **Bundled distribution.** Workspace packages export TypeScript sources (`moduleResolution: Bundler`, `tsc --noEmit` for type-checking). The CLI is bundled with esbuild into one file; the only runtime dependency is `better-sqlite3`. Tests run on sources via Vitest.
+5. **Node 20.19+ supported, Node 22/24 LTS recommended.** better-sqlite3 ships Windows prebuilts for Node 22+ only; Node 20 is EOL and needs C++ build tools.
+6. **Deterministic, extractive engine.** Retained items keep source wording (secrets redacted) so meaning is never paraphrased. Protected items (constraints, decisions, open tasks, questions, deadlines, conflicts) are never dropped for budget. The optional Ollama narrative is built from extracted items only and rejected if it introduces numbers/identifiers absent from the source.
+7. **Long assistant outputs are deliverables.** Assistant messages over 120 words contribute only explicitly structured items (labels, checkboxes, headings). This removed most false positives on long real-world transcripts.
+8. **Checkpoint immutability enforced in SQLite** (trigger) plus compare-and-insert version allocation; restores create new versions.
+9. **Continuation verification** checks the bot's first reply for the checkpoint code, objective and top tasks. It proves the handoff was loaded, not that platform context shrank; states are named accordingly.
+10. **Incremental import = leading-overlap skip.** Re-importing a conversation skips only the leading run of messages already stored for that session; repeats later in the new material are kept (an earlier "skip any seen hash" rule dropped legitimate repeated messages).
+11. **Questions are answered only by substantive replies.** "ok"/"perfect" after a question does not close it.
+12. **Lazy o200k tokenizer.** Parsing the BPE tables cost ~450 ms per CLI start; it now loads only when configured or requested. Until loaded, estimates are produced and labelled as `heuristic` — never mislabelled.
+13. **Bot-profile rules in handoffs.** Security boundaries and operating instructions from the profile are snapshotted into each checkpoint (`identity.standingRules`, secrets redacted) and rendered under "Must follow".
+14. **Cost advice.** When a handoff would not be meaningfully smaller than the imported text (≥ 80%), GCM warns that a fresh conversation will not save usage yet.
+15. **Global install via tarball.** `pnpm install:global` packs the CLI and runs `npm install -g <tgz>`; installing the workspace folder directly would hit `workspace:*` references.
+16. **Destructive platform steps are never available over MCP.** Reset chat can only be chosen locally (CLI/dashboard) with explicit acknowledgement; dashboard "Add bot" refuses to overwrite an existing profile.

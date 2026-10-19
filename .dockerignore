@@ -1,0 +1,13 @@
+**/node_modules
+**/dist
+**/*.tgz
+.git
+.gcm-dev
+coverage
+playwright-report
+test-results
+docker/.env
+.env
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm

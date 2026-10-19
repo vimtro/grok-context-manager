@@ -1,0 +1,49 @@
+{
+  "name": "grok-context-manager-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Grok Context Manager (GCM) — keep your bots, keep their knowledge, lose the unnecessary context.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "packageManager": "pnpm@10.33.2",
+  "scripts": {
+    "build": "pnpm --filter @gcm/dashboard run build && pnpm --filter grok-context-manager run build",
+    "typecheck": "tsc -p tsconfig.json",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "smoke": "node scripts/smoke-pack.mjs",
+    "install:global": "node scripts/install-global.mjs",
+    "examples": "node scripts/generate-examples.mjs",
+    "check": "pnpm typecheck && pnpm lint && pnpm test",
+    "gcm": "node apps/cli/dist/gcm.mjs"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@gcm/core": "workspace:*",
+    "@gcm/dashboard": "workspace:*",
+    "@gcm/mcp-server": "workspace:*",
+    "@gcm/storage": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.32.1",
+    "@playwright/test": "1.64.1",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^22.15.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^5.1.0",
+    "esbuild": "^0.25.0",
+    "eslint": "^10.0.0",
+    "globals": "^16.0.0",
+    "prettier": "^3.6.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.71.2",
+    "vite": "^7.3.7",
+    "vitest": "^4.1.12"
+  }
+}

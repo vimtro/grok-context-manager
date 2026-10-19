@@ -1,0 +1,520 @@
+{
+  "format": "gcm-checkpoint",
+  "formatVersion": 1,
+  "exportedAt": "2026-10-19T11:07:02.567Z",
+  "appVersion": "0.1.0",
+  "checkpoint": {
+    "id": "ck_0mvf5gfw886261d2e7c",
+    "botId": "sales",
+    "version": 1,
+    "parentId": null,
+    "restoredFromId": null,
+    "schemaVersion": 1,
+    "createdAt": "2026-10-19T11:07:00.344Z",
+    "sessionRef": null,
+    "source": {
+      "importIds": [
+        "imp_0mvf5gevwe76cdba69f"
+      ],
+      "completeness": "unknown",
+      "messageCount": 30,
+      "provider": "deterministic",
+      "profile": "balanced",
+      "engineVersion": "det-1.0.0",
+      "basedOnCheckpointId": null
+    },
+    "content": {
+      "identity": {
+        "botId": "sales",
+        "name": "Sales Bot",
+        "role": "Account executive for enterprise renewals",
+        "profileHash": "f0ab87343e57b61c5ab9eeb595a780c86964fe43bfd54e145bbfb0bb3a554d14",
+        "source": "user_provided",
+        "standingRules": [
+          "Never share customer data outside the CRM",
+          "Keep proposals to one page unless asked otherwise"
+        ]
+      },
+      "workstream": null,
+      "objective": {
+        "text": "Our goal is to close the Acme Corp renewal for Q4 and expand them to the Enterprise plan.",
+        "basis": "explicit",
+        "sourceRefs": [
+          {
+            "importId": "imp_0mvf5gevwe76cdba69f",
+            "seq": 3,
+            "role": "user"
+          }
+        ]
+      },
+      "constraints": [
+        {
+          "id": "it_cc7deb383528",
+          "category": "permanent",
+          "kind": "constraint",
+          "text": "Never send pricing to Acme without my approval.",
+          "flags": [
+            "negative_instruction",
+            "user_stated"
+          ],
+          "identifiers": [],
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gevwe76cdba69f",
+              "seq": 4,
+              "role": "user"
+            }
+          ],
+          "confidence": 0.85,
+          "reason": "negative instruction",
+          "protected": true,
+          "order": 6
+        },
+        {
+          "id": "it_409c0fbb19af",
+          "category": "permanent",
+          "kind": "constraint",
+          "text": "Do not CC legal on early drafts.",
+          "flags": [
+            "negative_instruction",
+            "user_stated"
+          ],
+          "identifiers": [],
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gevwe76cdba69f",
+              "seq": 4,
+              "role": "user"
+            }
+          ],
+          "confidence": 0.85,
+          "reason": "negative instruction",
+          "protected": true,
+          "order": 7
+        },
+        {
+          "id": "it_e9d801893032",
+          "category": "permanent",
+          "kind": "policy",
+          "text": "Always use the client's preferred name \"Acme Corp\", not \"ACME\".",
+          "flags": [
+            "user_stated"
+          ],
+          "identifiers": [],
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gevwe76cdba69f",
+              "seq": 4,
+              "role": "user"
+            }
+          ],
+          "confidence": 0.7,
+          "reason": "standing policy",
+          "protected": true,
+          "order": 8
+        },
+        {
+          "id": "it_ee842dcd8ba1",
+          "category": "permanent",
+          "kind": "policy",
+          "text": "Always CC Dana's assistant Priya on scheduling emails.",
+          "flags": [
+            "user_stated",
+            "conflict"
+          ],
+          "identifiers": [],
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gevwe76cdba69f",
+              "seq": 26,
+              "role": "user"
+            }
+          ],
+          "confidence": 0.7,
+          "reason": "standing policy",
+          "protected": true,
+          "order": 36
+        },
+        {
+          "id": "it_3dcc5a2b7f3c",
+          "category": "permanent",
+          "kind": "constraint",
+          "text": "Never CC Dana's assistant Priya on scheduling emails.",
+          "flags": [
+            "negative_instruction",
+            "user_stated",
+            "conflict"
+          ],
+          "identifiers": [],
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gevwe76cdba69f",
+              "seq": 29,
+              "role": "user"
+            }
+          ],
+          "confidence": 0.85,
+          "reason": "negative instruction",
+          "protected": true,
+          "order": 39
+        }
+      ],
+      "decisions": [
+        {
+          "id": "it_76e72afd561f",
+          "category": "decision",
+          "kind": "decision",
+          "text": "I recommend Option A: a 12-month Enterprise renewal at 120 seats.",
+          "flags": [
+            "approved_proposal"
+          ],
+          "identifiers": [],
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gevwe76cdba69f",
+              "seq": 12,
+              "role": "assistant"
+            },
+            {
+              "importId": "imp_0mvf5gevwe76cdba69f",
+              "seq": 13,
+              "role": "user"
+            }
+          ],
+          "confidence": 0.8,
+          "reason": "assistant proposal approved by the user (message 13)",
+          "protected": true,
+          "order": 21.5
+        },
+        {
+          "id": "it_1e79167de67b",
+          "category": "decision",
+          "kind": "decision",
+          "text": "switch from DocuSign to PandaDoc instead of DocuSign, since Acme already uses PandaDoc.",
+          "flags": [
+            "supersedes",
+            "user_stated"
+          ],
+          "identifiers": [],
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gevwe76cdba69f",
+              "seq": 25,
+              "role": "user"
+            }
+          ],
+          "confidence": 0.9,
+          "reason": "label \"decision:\"",
+          "protected": true,
+          "order": 35
+        }
+      ],
+      "pendingTasks": [
+        {
+          "id": "it_c62d6dba8eb7",
+          "category": "active_work",
+          "kind": "task",
+          "text": "Great, I'll prepare the Option A proposal for Dana by Friday.",
+          "flags": [
+            "deadline"
+          ],
+          "identifiers": [],
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gevwe76cdba69f",
+              "seq": 14,
+              "role": "assistant"
+            }
+          ],
+          "confidence": 0.65,
+          "reason": "assistant commitment",
+          "protected": true,
+          "order": 24,
+          "deadline": "Friday"
+        },
+        {
+          "id": "it_41134ea66834",
+          "category": "active_work",
+          "kind": "task",
+          "text": "I'll also prepare a one-page ROI summary.",
+          "flags": [],
+          "identifiers": [],
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gevwe76cdba69f",
+              "seq": 17,
+              "role": "assistant"
+            }
+          ],
+          "confidence": 0.65,
+          "reason": "assistant commitment",
+          "protected": true,
+          "order": 27
+        },
+        {
+          "id": "it_8b0f79916fd1",
+          "category": "active_work",
+          "kind": "task",
+          "text": "schedule a call with Dana for next week.",
+          "flags": [
+            "user_stated"
+          ],
+          "identifiers": [],
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gevwe76cdba69f",
+              "seq": 15,
+              "role": "user"
+            }
+          ],
+          "confidence": 0.9,
+          "reason": "label \"todo:\"",
+          "protected": true,
+          "order": 25
+        }
+      ],
+      "openQuestions": [
+        {
+          "id": "it_4571c222cf3a",
+          "category": "open_question",
+          "kind": "question",
+          "text": "Should I send the Option A proposal to Dana now, or wait for your pricing approval?",
+          "flags": [],
+          "identifiers": [],
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gevwe76cdba69f",
+              "seq": 30,
+              "role": "assistant"
+            }
+          ],
+          "confidence": 0.65,
+          "reason": "unanswered question",
+          "protected": true,
+          "order": 40
+        },
+        {
+          "id": "it_0fd7d710537e",
+          "category": "open_question",
+          "kind": "blocker",
+          "text": "waiting on Acme procurement to confirm the PO number.",
+          "flags": [
+            "user_stated"
+          ],
+          "identifiers": [],
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gevwe76cdba69f",
+              "seq": 28,
+              "role": "user"
+            }
+          ],
+          "confidence": 0.9,
+          "reason": "label \"blocked:\"",
+          "protected": true,
+          "order": 38
+        }
+      ],
+      "progress": [
+        {
+          "id": "it_07379d493dd6",
+          "category": "obsolete",
+          "kind": "completed",
+          "text": "I updated the pricing sheet in /workspace/acme/pricing.xlsx with the new budget.",
+          "flags": [],
+          "identifiers": [
+            "/workspace/acme/pricing.xlsx"
+          ],
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gevwe76cdba69f",
+              "seq": 24,
+              "role": "assistant"
+            }
+          ],
+          "confidence": 0.85,
+          "reason": "label \"done:\"",
+          "protected": false,
+          "order": 34
+        }
+      ],
+      "knowledge": [
+        {
+          "id": "it_585371129229",
+          "category": "permanent",
+          "kind": "fact",
+          "text": "the client's budget is now $55,000 per year after their Q3 review.",
+          "flags": [
+            "supersedes",
+            "user_stated"
+          ],
+          "identifiers": [
+            "$55,000"
+          ],
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gevwe76cdba69f",
+              "seq": 23,
+              "role": "user"
+            }
+          ],
+          "confidence": 0.6,
+          "reason": "durable fact stated by the user",
+          "protected": false,
+          "order": 33
+        },
+        {
+          "id": "it_a40d673a2d9c",
+          "category": "permanent",
+          "kind": "fact",
+          "text": "Their main contact is Dana Whitfield (dana.whitfield@acme.example).",
+          "flags": [
+            "user_stated"
+          ],
+          "identifiers": [
+            "dana.whitfield@acme.example"
+          ],
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gevwe76cdba69f",
+              "seq": 6,
+              "role": "user"
+            }
+          ],
+          "confidence": 0.6,
+          "reason": "durable fact stated by the user",
+          "protected": false,
+          "order": 12
+        },
+        {
+          "id": "it_ff21ce5febe8",
+          "category": "permanent",
+          "kind": "fact",
+          "text": "The renewal record is CRM-4821 and the contract lives in /workspace/acme/contract-2025.pdf.",
+          "flags": [],
+          "identifiers": [
+            "/workspace/acme/contract-2025.pdf",
+            "CRM-4821"
+          ],
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gevwe76cdba69f",
+              "seq": 8,
+              "role": "assistant"
+            }
+          ],
+          "confidence": 0.55,
+          "reason": "location / identifier fact",
+          "protected": false,
+          "order": 16
+        }
+      ],
+      "resources": [
+        {
+          "value": "/workspace/acme/pricing.xlsx",
+          "type": "file",
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gevwe76cdba69f",
+              "seq": 24,
+              "role": "assistant"
+            }
+          ]
+        },
+        {
+          "value": "/workspace/acme/contract-2025.pdf",
+          "type": "file",
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gevwe76cdba69f",
+              "seq": 8,
+              "role": "assistant"
+            }
+          ]
+        },
+        {
+          "value": "CRM-4821",
+          "type": "ticket",
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gevwe76cdba69f",
+              "seq": 8,
+              "role": "assistant"
+            }
+          ]
+        },
+        {
+          "value": "dana.whitfield@acme.example",
+          "type": "email",
+          "sourceRefs": [
+            {
+              "importId": "imp_0mvf5gevwe76cdba69f",
+              "seq": 6,
+              "role": "user"
+            }
+          ]
+        }
+      ],
+      "conflicts": [
+        {
+          "id": "cf_b75f7c3de8",
+          "itemIds": [
+            "it_ee842dcd8ba1",
+            "it_3dcc5a2b7f3c"
+          ],
+          "texts": [
+            "Always CC Dana's assistant Priya on scheduling emails.",
+            "Never CC Dana's assistant Priya on scheduling emails."
+          ],
+          "reason": "Similar statements with different values or opposite polarity and no explicit change marker."
+        }
+      ],
+      "uncertainties": [
+        "Source coverage is unknown: this checkpoint only reflects material imported into GCM; Grok Bot may hold earlier context that is not represented here.",
+        "1 pair(s) of conflicting statements need confirmation.",
+        "1 passage(s) resembling instruction overrides were excluded from working context; review them in the archive.",
+        "1 item(s) contained secret-like values that were redacted."
+      ],
+      "recommendedNextAction": {
+        "text": "Resolve blocker: waiting on Acme procurement to confirm the PO number.",
+        "basis": "most recent open blocker",
+        "sourceRefs": [
+          {
+            "importId": "imp_0mvf5gevwe76cdba69f",
+            "seq": 28,
+            "role": "user"
+          }
+        ]
+      },
+      "narrative": null,
+      "excluded": {
+        "temporary": 13,
+        "obsolete": 3,
+        "historical": 7,
+        "quarantined": 1,
+        "overBudget": 0,
+        "overBudgetItems": []
+      },
+      "stats": {
+        "sourceMessages": 30,
+        "sourceChars": 1964,
+        "sourceTokensEstimate": 504,
+        "unitsAnalyzed": 41,
+        "duplicatesMerged": 1,
+        "supersessions": 3
+      }
+    },
+    "contentHash": "d640d58ad35bce7883ef61bada2bc6a4b2d56908ee8384f7429624a9c1f7f1a2",
+    "tokenEstimate": {
+      "tokens": 744,
+      "method": "heuristic",
+      "kind": "estimated"
+    },
+    "warnings": [
+      "The handoff (~744 tokens) is not much smaller than the imported text (~504 tokens). Starting a fresh conversation now is unlikely to reduce usage; checkpoint when the conversation has grown."
+    ],
+    "reviewStatus": "reviewed",
+    "reviewedAt": "2026-10-19T11:07:00.344Z",
+    "reviewNote": "Reviewed example"
+  }
+}
