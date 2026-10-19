@@ -87,15 +87,13 @@ For a guided walkthrough, read the [user guide](docs/USER-GUIDE.md) or
 
 ## What is included in the current GitHub version?
 
-| Component | What it provides |
-| --- | --- |
-| **CLI + dashboard** | Bot profiles, import, analysis, checkpoints, handoffs, and archives |
-| **Local compaction engine** | Rule-based classification, deduplication, conflicts, and review |
-| **Versioned storage** | Local SQLite checkpoints and searchable imported messages |
-| **Grok Bot skill** | Reusable instructions for checkpoint and handoff workflows |
-| **MCP server** | 16 tools with authenticated HTTP or local stdio transports |
-| **Multi-bot workflows** | Scoped access, per-bot archives, and bulk operations |
-| **Optional Ollama** | Local narrative summaries; not required for basic processing |
+- **CLI + dashboard:** Bot profiles, import, analysis, checkpoints, handoffs, and archives.
+- **Local compaction engine:** Rule-based classification, deduplication, conflicts, and review.
+- **Versioned storage:** Local SQLite checkpoints and searchable imported messages.
+- **Grok Bot skill:** Reusable instructions for checkpoint and handoff workflows.
+- **MCP server:** 16 tools with authenticated HTTP or local stdio transports.
+- **Multi-bot workflows:** Scoped access, per-bot archives, and bulk operations.
+- **Optional Ollama:** Local narrative summaries; not required for basic processing.
 
 This table describes the checked-in **v0.1.0** code on `main`. Later local
 development work should not be considered released until it is pushed and verified.
